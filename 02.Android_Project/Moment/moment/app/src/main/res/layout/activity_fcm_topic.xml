@@ -1,0 +1,316 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".activity.fcm.FcmTopicActivity"
+    android:orientation="vertical"
+    >
+
+    <com.google.android.material.appbar.AppBarLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:theme="@style/ThemeOverlay.AppCompat.Dark">
+
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbar_mainAct"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:background="@color/moment_black">
+
+        </androidx.appcompat.widget.Toolbar>
+    </com.google.android.material.appbar.AppBarLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/moment_darkBlack"
+        android:orientation="vertical">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="30dp"
+            android:layout_marginBottom="30dp">
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="관심 지역 알림 설정"
+                android:fontFamily="@font/uto_godic"
+                android:textColor="@color/moment_white"
+                android:textAlignment="center"
+                android:textSize="25dp" />
+        </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:paddingRight="15dp"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="25dp"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:textSize="20sp"
+                        android:textColor="@color/moment_white"
+                        android:textAlignment="textEnd"
+                        android:layout_marginRight="15dp"
+                        android:fontFamily="@font/uto_godic"
+                        android:text="광주" />
+
+                    <Switch
+                        android:id="@+id/gwangju"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:track="@animator/switch_track_selector"
+                        android:thumb="@drawable/switch_thumb"
+                        android:trackTint="@color/moment_darkGray"
+
+                        android:textOff="해제"
+                        android:textOn="설정" />
+                </LinearLayout>
+
+                <Space
+                    android:layout_width="wrap_content"
+                    android:layout_height="20dp" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:textSize="20sp"
+                    android:textColor="@color/moment_white"
+                    android:textAlignment="textEnd"
+                    android:layout_marginRight="15dp"
+                    android:fontFamily="@font/uto_godic"
+                    android:text="서울" />
+                <Switch
+                    android:id="@+id/seoul"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:track="@animator/switch_track_selector"
+                    android:thumb="@drawable/switch_thumb"
+                    android:trackTint="@color/moment_darkGray"
+
+                    android:textOff="해제"
+                    android:textOn="설정" />
+            </LinearLayout>
+
+                <Space
+                    android:layout_width="wrap_content"
+                    android:layout_height="20dp" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:textSize="20sp"
+                    android:textColor="@color/moment_white"
+                    android:textAlignment="textEnd"
+                    android:layout_marginRight="15dp"
+                    android:fontFamily="@font/uto_godic"
+                    android:text="부산" />
+                <Switch
+                    android:id="@+id/busan"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:track="@animator/switch_track_selector"
+                    android:thumb="@drawable/switch_thumb"
+                    android:trackTint="@color/moment_darkGray"
+
+                    android:textOff="해제"
+                    android:textOn="설정" />
+            </LinearLayout>
+                <Space
+                    android:layout_width="wrap_content"
+                    android:layout_height="20dp" />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:textSize="20sp"
+                    android:textColor="@color/moment_white"
+                    android:textAlignment="textEnd"
+                    android:layout_marginRight="15dp"
+                    android:fontFamily="@font/uto_godic"
+                    android:text="경기도" />
+                <Switch
+                    android:id="@+id/kyungki"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:track="@animator/switch_track_selector"
+                    android:thumb="@drawable/switch_thumb"
+                    android:trackTint="@color/moment_darkGray"
+
+                    android:textOff="해제"
+                    android:textOn="설정" />
+            </LinearLayout>
+                <Space
+                    android:layout_width="wrap_content"
+                    android:layout_height="20dp" />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:textSize="20sp"
+                    android:textColor="@color/moment_white"
+                    android:textAlignment="textEnd"
+                    android:layout_marginRight="15dp"
+                    android:fontFamily="@font/uto_godic"
+                    android:text="강원도" />
+                <Switch
+                    android:id="@+id/kangwon"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:track="@animator/switch_track_selector"
+                    android:thumb="@drawable/switch_thumb"
+                    android:trackTint="@color/moment_darkGray"
+
+                    android:textOff="해제"
+                    android:textOn="설정" />
+            </LinearLayout>
+                <Space
+                    android:layout_width="wrap_content"
+                    android:layout_height="20dp" />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:textSize="20sp"
+                    android:textColor="@color/moment_white"
+                    android:textAlignment="textEnd"
+                    android:layout_marginRight="15dp"
+                    android:fontFamily="@font/uto_godic"
+                    android:text="충청도" />
+                <Switch
+                    android:id="@+id/chungchung"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:track="@animator/switch_track_selector"
+                    android:thumb="@drawable/switch_thumb"
+                    android:trackTint="@color/moment_darkGray"
+
+                    android:textOff="해제"
+                    android:textOn="설정" />
+            </LinearLayout>
+                <Space
+                    android:layout_width="wrap_content"
+                    android:layout_height="20dp" />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:textSize="20sp"
+                    android:textColor="@color/moment_white"
+                    android:textAlignment="textEnd"
+                    android:layout_marginRight="15dp"
+                    android:fontFamily="@font/uto_godic"
+                    android:text="전라도" />
+                <Switch
+                    android:id="@+id/junra"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:track="@animator/switch_track_selector"
+                    android:thumb="@drawable/switch_thumb"
+                    android:trackTint="@color/moment_darkGray"
+
+                    android:textOff="해제"
+                    android:textOn="설정" />
+            </LinearLayout>
+                <Space
+                    android:layout_width="wrap_content"
+                    android:layout_height="20dp" />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:textSize="20sp"
+                    android:textColor="@color/moment_white"
+                    android:textAlignment="textEnd"
+                    android:layout_marginRight="15dp"
+                    android:fontFamily="@font/uto_godic"
+                    android:text="경상도" />
+                <Switch
+                    android:id="@+id/kyungsang"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:track="@animator/switch_track_selector"
+                    android:thumb="@drawable/switch_thumb"
+                    android:trackTint="@color/moment_darkGray"
+
+                    android:textOff="해제"
+                    android:textOn="설정" />
+            </LinearLayout>
+            <Space
+                android:layout_width="wrap_content"
+                android:layout_height="20dp" />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:textSize="20sp"
+                    android:textColor="@color/moment_white"
+                    android:textAlignment="textEnd"
+                    android:layout_marginRight="15dp"
+                    android:fontFamily="@font/uto_godic"
+                    android:text="제주도" />
+                <Switch
+                    android:id="@+id/jeju"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:track="@animator/switch_track_selector"
+                    android:thumb="@drawable/switch_thumb"
+                    android:trackTint="@color/moment_darkGray"
+
+                    android:textOff="해제"
+                    android:textOn="설정" />
+            </LinearLayout>
+        </LinearLayout>
+    </LinearLayout>
+</LinearLayout>

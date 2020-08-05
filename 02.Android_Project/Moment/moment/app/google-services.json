@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "141532660111",
+    "firebase_url": "https://moment-b21f0.firebaseio.com",
+    "project_id": "moment-b21f0",
+    "storage_bucket": "moment-b21f0.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:141532660111:android:a1da121e7d14c6ac26cbfa",
+        "android_client_info": {
+          "package_name": "com.example.moment"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "141532660111-n6pqnmtgcltu9mmnvm8eh6kn5pihtp1q.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.moment",
+            "certificate_hash": "6d17274c9a02094eef246ac7cece430a444d6534"
+          }
+        },
+        {
+          "client_id": "141532660111-rifl4u12edfe8ponlgc31iq02nnrnukj.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA1LAgRn2cIsEW_g3iG7B-lWWJh7n-OjS4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "141532660111-rifl4u12edfe8ponlgc31iq02nnrnukj.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

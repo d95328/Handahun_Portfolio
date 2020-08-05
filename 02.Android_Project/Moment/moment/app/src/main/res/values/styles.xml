@@ -1,0 +1,61 @@
+<resources>
+
+    <!-- Base application theme. -->
+    <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
+        <!-- Customize your theme here. Primary -> 타이틀바 / PrimaryDark -> 상태창 색상 -->
+        <item name="colorPrimary">@color/moment_black</item>
+        <item name="colorPrimaryDark">@color/moment_black</item>
+        <item name="colorAccent">#ffffff</item>
+        <item name="windowNoTitle">true</item>
+        <item name="android:alertDialogTheme">@style/AlertDialogStyle</item>
+       <!-- 어플이 cold start 되면서 보이는 하얀색 화면을 없애고 바로 인트로 화면으로 -->
+        <item name="android:windowDisablePreview">true</item>
+    </style>
+
+    <style name="AppTheme.NoActionBar">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+    </style>
+
+    <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
+
+    <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
+
+    <!--다이얼로그 스타일-->
+    <style name="AlertDialogStyle" parent="Theme.AppCompat.DayNight.Dialog">
+        <!--colorAccent : 확인 취소 색상-->
+        <item name="colorAccent">@color/moment_white</item>
+        <item name="android:background">@color/moment_darkBlack</item>
+        <item name="android:windowMinWidthMajor">@dimen/dialogMinWidth_Major</item>
+        <item name="android:windowMinWidthMinor">@dimen/dialogMinWidth_Minor</item>
+        <item name="android:windowTitleStyle">@font/uto_godic</item>
+        <item name="android:titleTextStyle">@font/uto_godic</item>
+        <item name="android:textColor">@color/moment_white</item>
+        <item name="android:fontFamily">@font/uto_godic</item>
+    </style>
+    <style name="IotAlertDialogStyle" parent="Theme.AppCompat.DayNight.Dialog">
+        <!--colorAccent : 확인 취소 색상-->
+        <item name="colorAccent">@color/moment_black</item>
+        <item name="android:background">@color/moment_white</item>
+        <item name="android:windowMinWidthMajor">@dimen/dialogMinWidth_Major</item>
+        <item name="android:windowMinWidthMinor">@dimen/dialogMinWidth_Minor</item>
+        <item name="android:windowTitleStyle">@font/uto_godic</item>
+        <item name="android:titleTextStyle">@font/uto_godic</item>
+        <item name="android:textColor">@color/moment_black</item>
+        <item name="android:fontFamily">@font/uto_godic</item>
+    </style>
+
+    <!--메뉴 아이템 폰트 스타일-->
+    <style name="MenuItemFont" parent="android:Widget.TextView">
+        <item name="android:fontFamily">@font/uto_godic</item>
+    </style>
+
+    <!--스피너 스타일-->
+    <style name="SpinnerStyle" parent="Widget.AppCompat.DropDownItem.Spinner">
+        <item name="android:textColor">@color/moment_white</item>
+        <item name="android:textSize">12sp</item>
+    </style>
+
+
+
+</resources>

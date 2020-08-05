@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center"
+    android:orientation="vertical"
+    android:background="@drawable/back"
+    tools:context=".activity.user.LoginActivity">
+
+
+
+    <LinearLayout
+        android:layout_width="300dp"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:gravity="center">
+
+
+        <TextView
+            android:layout_width="250dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:textAlignment="center"
+            android:fontFamily="@font/permanentmarker_regular"
+            android:text="Moment"
+            android:textColor="@color/moment_lightGray"
+            android:layout_marginTop="30dp"
+            android:textSize="40sp"/>
+
+        <EditText
+            android:id="@+id/uLogin_userid"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginTop="100dp"
+            android:background="@drawable/edit_round"
+            android:hint="Username"
+            android:inputType="textEmailAddress"
+            android:textCursorDrawable="@drawable/usertext_cursor"
+            android:paddingLeft="10dp" />
+
+        <TextView
+            android:id="@+id/uLogin_userid_inline"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="left"
+            android:focusable="false"
+            android:paddingLeft="10dp"
+            android:text=""
+            android:textColor="#FF0320"
+            android:textSize="10sp" />
+
+
+        <EditText
+            android:id="@+id/uLogin_userpw"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:background="@drawable/edit_round"
+            android:hint="Password"
+            android:inputType="textPassword"
+            android:textCursorDrawable="@drawable/usertext_cursor"
+            android:paddingLeft="10dp" />
+
+        <TextView
+            android:id="@+id/uLogin_userpw_inline"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="left"
+            android:focusable="false"
+            android:paddingLeft="10dp"
+            android:text=""
+            android:textColor="#FF0320"
+            android:textSize="10sp"
+            android:layout_marginBottom="30dp"/>
+
+
+        <Button
+            android:id="@+id/uLoginbtn"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:background="@drawable/button_layout"
+            android:text="LOGIN"
+            android:layout_marginBottom="20dp"
+            android:textColor="#FAFAFA"
+            android:textSize="25sp" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:orientation="horizontal">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/moment_white"
+                android:paddingRight="5dp"
+                android:textAlignment="center"
+                android:text="New User? "/>
+            <TextView
+                android:id="@+id/uSignuptext"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="SIGNUP"
+                android:textAlignment="center"
+                android:textColor="@color/moment_blue"
+                android:textSize="15sp" />
+        </LinearLayout>
+
+
+    </LinearLayout>
+</LinearLayout>

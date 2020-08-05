@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".activity.iot.Pano360ViewActivity">
+    <com.google.vr.sdk.widgets.pano.VrPanoramaView
+        android:id="@+id/vrPanoramaView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" >
+        <Button
+            android:layout_gravity="left"
+            android:id="@+id/pano_back"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/button_layout"
+            android:text="다시 촬영"
+            android:textColor="#FFFFFF"
+            android:textStyle="bold"
+            android:paddingLeft="20dp"
+            android:paddingRight="20dp"
+            android:textSize="18sp"
+            />
+        <Button
+            android:layout_gravity="right"
+            android:id="@+id/pano_write"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="글작성"
+            android:background="@drawable/button_layout"
+            android:textColor="#FFFFFF"
+            android:textStyle="bold"
+            android:paddingLeft="20dp"
+            android:paddingRight="20dp"
+            android:textSize="18sp"/>
+    </com.google.vr.sdk.widgets.pano.VrPanoramaView>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

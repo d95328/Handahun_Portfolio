@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#6200EE</color>
+    <color name="colorPrimaryDark">#3700B3</color>
+    <color name="colorAccent">#03DAC5</color>
+
+    <!--어플 메인컬러 4종-->
+    <color name="moment_lightGray">#a3a1a1</color>
+    <color name="moment_darkGray">#8b8687</color>
+    <color name="moment_white">#e3dede</color>
+    <color name="moment_black">#333030</color>
+    <color name="moment_darkBlack">#272424</color>
+    <color name="moment_blue">#4596ff</color>
+</resources>
