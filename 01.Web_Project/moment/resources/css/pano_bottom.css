@@ -1,0 +1,78 @@
+.ec {
+	position: relative
+}
+
+.ec .ec__holder {
+	overflow: hidden
+}
+
+.ec .ec__track {
+	will-change: transform
+}
+
+.ec .ec__track:after {
+	content: '';
+	display: table;
+	clear: both
+}
+
+.ec .ec__item {
+	float: left;
+	overflow: hidden
+}
+
+.ec .ec__pagination {
+	text-align: center;
+	margin-top: 10px
+}
+
+.ec .ec__pagination .pagination__dot {
+	width: 8px;
+	height: 8px;
+	background-color: transparent;
+	display: inline-block;
+	border: 4px solid #000;
+	margin: 0 5px;
+	border-radius: 50%;
+	cursor: pointer
+}
+
+.ec .ec__pagination .pagination__dot--active {
+	background-color: #fff
+}
+
+.ec .ec__nav {
+	position: absolute;
+	bottom: 130px;
+	cursor: pointer;
+	
+}
+.ec .ec__nav{
+	background-image: url(https://s.pstatic.net/static/www/img/uit/2020/sp_main.44265f.png);
+	background-repeat: no-repeat;
+  background-size: 471px 442px;	
+  display: inline-block;
+  width: 44px;
+  height: 44px;
+  vertical-align: top;
+  background-position: -49px -308px;
+	opacity: 0.5;
+}
+
+.ec .ec__nav:hover{
+	opacity: 1.0;
+}
+
+.ec .ec__nav:before {
+	content: ''
+}
+
+ .ec .ec__nav--prev {
+ 	transform: rotate(-180deg); 
+	left: 0em
+}
+
+.ec .ec__nav--next {
+/* 	transform: rotate(45deg); */
+	right: 0em
+} 

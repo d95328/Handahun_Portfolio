@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="user.mapper">
+
+<select id="login" resultType="android.user.UserVO">
+	SELECT * 
+	FROM m_user 
+	WHERE u_userid = #{userid}
+	AND u_userpw = #{userpwd}
+</select>
+
+<update id="modify">
+	UPDATE m_user 
+	SET u_userpw = #{u_userpw}, u_nick = #{u_nick}, u_local = #{u_local}, u_profileimg = #{u_profileimg} 
+	WHERE u_userid = #{u_userid}
+</update>
+
+<insert id="signUp">
+	INSERT INTO m_user(u_userid, u_userpw, u_nick, u_local, u_name, u_profileimg)
+	VALUES(#{u_userid}, #{u_userpw}, #{u_nick}, #{u_local}, #{u_name}, #{u_profileimg})
+</insert>
+
+<select id="userIdDuplicateCheck" resultType="integer">
+	SELECT count(*)
+	FROM m_user 
+	WHERE u_userid = #{u_userid} 
+</select>
+
+<select id="userNickDuplicateCheck" resultType="integer">
+	SELECT count(*)
+	FROM m_user 
+	WHERE u_nick = #{u_nick}
+</select>
+
+</mapper>

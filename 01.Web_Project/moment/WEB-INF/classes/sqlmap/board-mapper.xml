@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="board.mapper">
+
+<select id="latelyList" resultType="android.board.BoardVO">  
+	SELECT b.*, u_nick b_nick, u_profileimg b_profileimg
+	FROM m_board b, m_user u
+	WHERE b.b_userid = u.u_userid
+	AND b_pano = 'N'
+	ORDER BY b.b_no DESC
+</select>
+
+<select id="poularList" resultType="android.board.BoardVO">
+	SELECT b.*, u_nick b_nick, u_profileimg b_profileimg
+	FROM m_board b, m_user u
+	WHERE b.b_userid = u.u_userid 
+	AND b_pano = 'N'
+	ORDER BY b.b_ddabong DESC  
+</select>
+
+<select id="myBoardList" resultType="android.board.BoardVO">
+	SELECT b.*, u_nick b_nick, u_profileimg b_profileimg 
+	FROM m_board b, m_user u 
+	WHERE b.b_userid = u.u_userid
+	AND b.b_userid = #{userid}
+	ORDER BY b.b_no DESC 
+</select>
+
+<insert id="boardWrite">
+	INSERT INTO m_board (b_no, b_userid, b_title, b_coment, b_imgpath, b_local, b_tag, b_writedate, b_latitude, b_longitude, b_ddabong, b_readcnt)
+	VALUES (m_board_seq.nextval, #{b_userid}, #{b_title}, #{b_coment}, #{b_imgpath}, #{b_local}, #{b_tag}, DEFAULT, #{b_latitude}, #{b_longitude}, DEFAULT, DEFAULT)
+</insert>
+
+<update id="modify">
+	UPDATE m_board 
+	SET b_coment = #{b_coment}, b_title = #{b_title}, b_local = #{b_local}, b_latitude = #{b_latitude}, b_longitude = #{b_longitude} 
+	WHERE b_no = #{b_no}
+</update>
+
+<select id="detail" resultType="android.board.BoardVO">
+	SELECT b.*, u_nick b_nick, u_profileimg b_profileimg  
+	FROM m_board b, m_user u 
+	WHERE b.b_userid = u.u_userid 
+	AND b.b_no = #{no}
+</select>
+
+<update id="readCnt">
+	UPDATE m_board 
+	SET b_readcnt = b_readcnt+1 
+	WHERE b_no = #{no}
+</update>
+
+<select id="boardFavorite" resultType="android.board.FavoriteVO">
+	SELECT * FROM m_favorite WHERE f_bno = #{b_no} AND f_userid = #{b_userid}
+</select>
+
+<insert id="boardAddFavorite">
+	INSERT INTO m_favorite( f_bno, f_userid, f_favorites, f_ddabong )
+	VALUES( #{b_no}, #{b_userid}, DEFAULT, DEFAULT )
+</insert>
+
+<update id="boardDdabong">
+	UPDATE m_favorite SET f_ddabong = #{f_ddabong}, f_favorites = #{f_favorites} WHERE f_bno = #{f_bno} AND f_userid = #{f_userid}
+</update>
+
+<update id="boardDdabongUpdate">
+	UPDATE m_board
+	SET b_ddabong = (SELECT COUNT(f_ddabong) FROM m_board b, m_favorite f WHERE b.b_no = f.f_bno AND f.f_ddabong = 'Y' AND f.f_bno = #{f_bno} )
+	WHERE b_no = #{f_bno}
+</update>
+
+<select id="myFavoriteList" resultType="android.board.BoardVO">
+	SELECT b.*, u_nick b_nick, u_profileimg b_profileimg 
+	FROM m_board b, m_user u 
+	WHERE b.b_userid = u.u_userid 
+	AND b_no in (SELECT f_bno FROM m_favorite f WHERE f_userid = #{userid} AND f.f_favorites = 'Y') 
+	ORDER BY b.b_writedate DESC
+</select>
+
+<select id="markerNearby" resultType="android.board.BoardVO">
+<![CDATA[
+	SELECT b.*, u_nick b_nick, u_profileimg b_profileimg 
+	FROM m_board b, m_user u 
+	WHERE b.b_userid = u.u_userid 
+	AND b_latitude - 0.008 < #{b_latitude} AND b_latitude + 0.008 > #{b_latitude} 
+	AND b_longitude - 0.008 < #{b_longitude} AND b_longitude + 0.008 > #{b_longitude}
+]]> 
+</select>
+
+<select id="searchList" resultType="android.board.BoardVO">
+	SELECT b.*, u_nick b_nick, u_profileimg b_profileimg 
+	FROM m_board b, m_user u 
+	WHERE #{choice} like '%' || #{search} || '%'
+	AND b.b_userid = u.u_userid 
+	ORDER BY b.b_no DESC 
+</select>
+
+
+
+
+
+
+
+
+
+
+
+
+</mapper>

@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="qna.mapper">
+	
+	<!-- 리스트 조회 -->
+	<select id="total_faq" resultType="Integer">
+		SELECT count(*) FROM qna WHERE writer in (SELECT u_userid FROM m_user WHERE u_admin = 'M')
+	</select>
+	<select id="total_my" resultType="Integer">
+		SELECT count(*) FROM qna WHERE writer = #{userid}
+	</select>
+	<select id="total_q" resultType="Integer">
+		SELECT count(*) FROM qna WHERE answer_result = 'N'
+	</select>
+	<select id="total_a" resultType="Integer">
+		SELECT count(*) FROM qna WHERE writer in (SELECT u_userid FROM m_user WHERE u_admin = 'M')
+	</select>
+	<select id="total_all" resultType="Integer">
+		SELECT count(*) FROM qna WHERE writer NOT IN (SELECT u_userid FROM m_user WHERE u_admin = 'M')
+	</select>
+	
+	<select id="total" resultType="Integer">
+		SELECT count(*) FROM qna <include refid="search_where" />
+	</select>
+	
+	<!-- 자주하는 질문 리스트 조회( 10건씩 ) -->
+	<select id="faqlist" resultType="web.qna.QnaVO">
+		SELECT ROWNUM no, n.*, (SELECT u_name FROM m_user WHERE u_userid = writer ) name 
+		FROM	(SELECT n.*
+						FROM (SELECT * FROM qna) n
+						) n
+		WHERE ROWNUM BETWEEN #{beginList} and #{endList}
+		AND writer in (SELECT u_userid FROM m_user WHERE u_admin = 'M')
+	</select>
+	
+	<!-- 내 질문 리스트 조회( 10건씩 ) -->
+	<select id="mylist" resultType="web.qna.QnaVO">
+		SELECT ROWNUM no, n.*, (SELECT u_name FROM m_user WHERE u_userid = writer ) name 
+		FROM	(SELECT n.*
+						FROM (SELECT * FROM qna) n
+						) n
+		WHERE ROWNUM BETWEEN #{beginList} and #{endList}
+		AND writer = #{userid}
+	</select>
+	<!-- 답변할 목록 리스트 조회(10건씩) -->
+	<select id="question" resultType="web.qna.QnaVO">
+		SELECT ROWNUM no, n.*, (SELECT u_name FROM m_user WHERE u_userid = writer ) name 
+		FROM	(SELECT n.*
+						FROM (SELECT * FROM qna) n
+						) n
+		WHERE ROWNUM BETWEEN #{beginList} and #{endList}
+		AND answer_result = 'N'
+	</select>
+	<!-- 답변된 목록 리스트 조회(10건씩) -->
+	<select id="answer" resultType="web.qna.QnaVO">
+		SELECT ROWNUM no, n.*, (SELECT u_name FROM m_user WHERE u_userid = writer ) name 
+		FROM	(SELECT n.*
+						FROM (SELECT * FROM qna) n
+						) n
+		WHERE ROWNUM BETWEEN #{beginList} and #{endList}
+		AND answer_result = 'Y'
+		AND writer NOT IN (SELECT u_userid FROM m_user WHERE u_admin = 'M')
+		ORDER BY no DESC
+	</select>
+	<!-- 전체 목록 리스트 조회(10건씩) -->
+	<select id="all" resultType="web.qna.QnaVO">
+		SELECT ROWNUM no, n.*, (SELECT u_name FROM m_user WHERE u_userid = writer ) name 
+		FROM	(SELECT n.*
+						FROM (SELECT * FROM qna <include refid="search_where" /> ) n
+						) n
+		WHERE ROWNUM BETWEEN #{beginList} and #{endList}
+		AND writer NOT IN (SELECT u_userid FROM m_user WHERE u_admin = 'M')
+		ORDER BY no DESC
+	</select>
+	
+	<!-- 질문 등록 -->
+	<insert id="q_insert">
+		INSERT INTO qna (id, title, content, writer, writedate)
+		VALUES (qna_id_seq.nextval, #{title}, #{content}, #{writer}, SYSDATE)
+	</insert>	
+	<!-- 답변 등록 -->
+	<update id="a_update">
+		UPDATE qna
+		SET answer_writer = #{writer}, answer_content = #{content}, answer_writedate = SYSDATE, answer_result = 'Y'
+		WHERE id = #{id}
+	</update>
+	<!-- 글삭제 -->
+	<delete id="delete">
+		DELETE FROM qna
+		WHERE id = #{id}
+	</delete>
+	
+	<!-- 검색 WHERE문  -->
+	<sql id="search_where">
+		<if test="search == 'title' or search == 'content'">
+			WHERE ${search} LIKE '%' || #{keyword} || '%'
+		</if>
+		<if test="search == 'writer'">
+			WHERE <include refid="search_writer" />
+		</if>
+		<if test="search == 'all'">
+			WHERE title LIKE '%' || #{keyword} || '%'
+			OR content LIKE '%' || #{keyword} || '%'
+			OR <include refid="search_writer" />
+		</if>
+	</sql>
+	<sql id="search_writer">
+		writer IN ( SELECT u_userid FROM m_user WHERE u_name LIKE '%' || #{keyword} || '%' )
+	</sql>
+
+
+
+</mapper>

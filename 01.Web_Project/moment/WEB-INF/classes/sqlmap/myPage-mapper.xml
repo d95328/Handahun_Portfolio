@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="mypage.mapper">
+
+
+	<sql id="search_where">
+		<if test="search=='content' ">
+			 b_coment like '%' || #{keyword} || '%'
+		</if>
+		<if test="search=='title' ">
+			 b_title like '%' || #{keyword} || '%'
+		</if>
+<!-- 		<if test="search=='writer'">	
+			 u_nick like '%' || #{keyword} ||'%'
+		
+		</if> -->
+		<if test="search=='all'">
+			 b_title like '%' || #{keyword} || '%'
+			or b_coment like '%' || #{keyword} || '%'		
+		</if>
+	</sql>
+	
+
+
+
+
+	<select id="total" resultType="Integer">
+	
+	    select count(*)  from (select * from m_board where b_userid =#{userid}	)          
+		<if test="keyword != null">where <include refid="search_where"/></if>
+	</select>
+
+	<select id="mylist" resultType="web.myPage.MyPageVO">
+<!-- 		select * from ( SELECT rownum no, b.*
+						FROM (select  b.* from (select * from m_board where b_userid = #{userid} 
+			<if test="keyword != null">where <include refid="search_where"/></if>) b order by no desc) b
+		where no between #{beginList} and #{endList} -->
+		
+		select * from (
+        select rownum no, b.* 
+        from (select * from m_board where b_userid =#{userid} 	)b
+       <if test="keyword != null">where <include refid="search_where"/></if>
+        ) where no between #{beginList} and #{endList} order by b_no desc
+		
+		
+	</select>                
+
+	
+	<select id="myddabongtotal" resultType="Integer">
+		select count(*) 
+		from ( select * from m_favorite where f_userid =#{userid} and f_ddabong ='Y') F,  m_board B
+		where F.f_bno = b.b_no
+	</select>
+
+	<select id="myddabong" resultType="web.myPage.MyPageVO">
+		select * 
+		from ( select DISTINCT m.* 
+		       from (select rownum no, f.* , b.*
+		             from ( select * from m_favorite where f_userid =#{userid}  and f_ddabong ='Y') F,  m_board B 
+		             where F.f_bno = b.b_no) M, m_user U
+		       where m.b_userid = u.u_userid <if test="keyword != null ">and<include refid="search_where"/></if> ) 
+		where no between #{beginList} and #{endList} order by b_no desc
+	</select>
+	
+
+	<select id="myfavoritetotal" resultType="Integer">
+		select count(*) 
+		from ( select * from m_favorite where f_userid =#{userid} and f_favorites ='Y') F,  m_board B
+		where F.f_bno = b.b_no
+	</select>
+
+	<select id="myfavorite" resultType="web.myPage.MyPageVO">
+		select * 
+		from ( select DISTINCT m.* 
+		         from   (select rownum no, f.* , b.*
+		                 from ( select * from m_favorite where f_userid =#{userid}  and f_favorites ='Y') F,  m_board B 
+		                 where F.f_bno = b.b_no) M, m_user U
+		            where m.b_userid = u.u_userid <if test="keyword != null ">and<include refid="search_where"/></if>) 
+		where no between #{beginList} and #{endList} order by b_no desc
+	</select>
+
+
+
+	<select id="memberpostlisttotal" resultType="Integer">
+		select count(*) from m_board where b_userid=#{userid}
+	</select>
+
+
+	<select id="memberpostlist" resultType="web.myPage.MyPageVO">
+		select * from m_board where
+		b_userid=#{userid}
+	</select>
+	
+
+
+	<delete id="mylistdelete">
+		delete from m_board where b_no = #{id}
+	</delete>
+	
+
+</mapper>

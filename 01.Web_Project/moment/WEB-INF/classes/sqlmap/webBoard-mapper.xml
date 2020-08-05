@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="webBoard.mapper">
+
+<update id="boardDdabong">
+	UPDATE m_favorite SET f_ddabong = #{f_ddabong}, f_favorites = #{f_favorites} WHERE f_bno = #{f_bno} AND f_userid = #{f_userid}
+</update>
+
+<update id="boardDdabongUpdate">
+	UPDATE m_board
+	SET b_ddabong = (SELECT COUNT(f_ddabong) FROM m_board b, m_favorite f WHERE b.b_no = f.f_bno AND f.f_ddabong = 'Y' AND f.f_bno = #{f_bno} )
+	WHERE b_no = #{f_bno}
+</update>
+
+<!-- 해당 게시글에 대해 사용자가 최초 접근시 Favorite 테이블에 이력을 추가함. -->
+<insert id="boardAddFavorite">
+	INSERT INTO m_favorite( f_bno, f_userid, f_favorites, f_ddabong )
+	VALUES( #{b_no}, #{b_userid}, DEFAULT, DEFAULT )
+</insert>
+
+<!-- 상세조회시 해당게시글에대한 즐찾여부 (로그인 한 사용자 일시) 조회 -->
+<select id="boardFavorite" resultType="web.board.WebFavoriteVO">
+	SELECT * FROM m_favorite WHERE f_bno = #{b_no} AND f_userid = #{b_userid}
+</select>
+
+<!-- 상세조회시 조회수 증가 -->
+<update id="readCnt">
+	UPDATE m_board 
+	SET b_readcnt = b_readcnt+1 
+	WHERE b_no = #{no}
+</update>
+
+<!-- 글상세조회 -->
+<select id="detail" resultType="web.board.WebBoardVO">
+SELECT b.*, u_nick b_nick, u_profileimg b_profileimg 
+FROM m_board b, m_user u 
+WHERE b.b_userid = u.u_userid 
+AND b.b_no = #{no}
+</select>
+
+<select id="total" resultType="integer">
+	select count(*) from m_board <include refid="search_where" /> 
+</select>
+
+<!-- 기본 default 출력 리스트 / 최신순 목록출력 -->
+<select id="list" resultType="web.board.WebBoardVO">
+	select b.*, (select u_nick from m_user where u_userid=b.b_userid) b_nick 
+	from (select rownum no, b.* 
+		  from (select * from m_board <include refid="search_where" /> <include refid="lateOrRank"/>) b 
+		  order by no desc) b
+	where no between #{beginList} and #{endList}
+</select>
+
+
+<!-- 공통 쿼리문 작성 -->
+<!-- 검색조건 분기 -->
+<sql id="search_where">
+	<!-- 제목이나 내용 검색 -->
+	<if test="search=='title' or search=='coment'">
+		where b_${search} like '%' || #{keyword} || '%' and b_pano = 'N'
+	</if>
+	<if test="search=='writer'">
+		where <include refid="search_writer"/> and b_pano = 'N'
+	</if>
+	<!-- 전체 검색 -->
+	<if test="search=='all'">
+		where b_title  like '%' || #{keyword} || '%'
+		or b_coment like '%' || #{keyword} || '%'
+		or <include refid="search_writer"/>
+	</if>
+</sql>
+<!-- 글쓴이 검색조건-->
+<sql id="search_writer">
+	b_userid in (select u_userid from m_user where u_nick like '%' || #{keyword} || '%') 
+</sql>
+<!-- 최신글, 추천순 목록조회 분기 -->
+<sql id="lateOrRank">
+	<if test="viewType=='lately'">
+		order by b_no
+	</if>
+	<if test="viewType=='ddabong'">
+		order by b_ddabong
+	</if>
+	
+</sql>
+
+<!-- 새글 저장 -->
+<insert id="insert">
+	INSERT INTO m_board (b_no, b_userid, b_title, b_coment, b_imgpath, b_local, b_tag, b_writedate, b_latitude, b_longitude, b_ddabong, b_readcnt)
+	VALUES (m_board_seq.nextval, #{b_userid}, #{b_title}, #{b_coment}, #{b_imgpath}, #{b_local}, DEFAULT , SYSDATE , #{b_latitude}, #{b_longitude}, DEFAULT, DEFAULT)
+</insert>
+<!-- 글 삭제 -->
+<delete id="boardDelete">
+	DELETE FROM m_board
+	WHERE b_no = #{id}
+</delete>
+<!-- 글 수정 -->
+<update id="boardUpdate">
+	UPDATE m_board
+	SET b_title = #{b_title},	b_coment = #{b_coment}, b_local = #{b_local}, b_latitude = #{b_latitude}, b_longitude = #{b_longitude}
+	WHERE b_no = #{b_no}
+</update>
+
+
+</mapper>
